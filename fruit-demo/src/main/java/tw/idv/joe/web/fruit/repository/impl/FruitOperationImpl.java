@@ -49,7 +49,6 @@ public class FruitOperationImpl implements FruitOperation {
 			query.setParameter("price", price.get());
 		if (amount.isPresent())
 			query.setParameter("amount", amount.get());
-		
 		return query.setParameter("id", fruit.getId())
 					.executeUpdate();
 	}

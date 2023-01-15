@@ -4,6 +4,7 @@
 package tw.idv.joe.web.fruit.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 import tw.idv.joe.web.fruit.entity.Fruit;
 
@@ -17,9 +18,8 @@ import tw.idv.joe.web.fruit.entity.Fruit;
 public interface FruitService {
 	List<Fruit> selectForPriceRange(Integer price, Integer price2);
 	List<Fruit> selectAll();
-	
 	List<Fruit> selectForLikeName(String name);
-	
+	Optional<Fruit> selectForId(Integer id);
 	Fruit selectForName(String name);
 	boolean removeById(Integer id);
 	

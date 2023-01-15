@@ -6,6 +6,7 @@ package tw.idv.joe.web.fruit.Service.impl;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -53,7 +54,7 @@ public class FruitServiceImpl implements FruitService {
 	@Transactional
 	@Override
 	public boolean update(Fruit fruit) {
-		return repository.save(fruit) != null;
+		return repository.update(fruit) > 0;
 	}
 
 	@Transactional
@@ -116,6 +117,11 @@ public class FruitServiceImpl implements FruitService {
 		if(price == null || price2 == null)
 			return Collections.emptyList();
 		return repository.findByPriceBetween(price, price2);
+	}
+
+	@Override
+	public Optional<Fruit> selectForId(Integer id) {
+		return repository.findById(id);
 	}
 
 }

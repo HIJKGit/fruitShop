@@ -4,6 +4,7 @@
 package tw.idv.joe.web.fruit.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import tw.idv.joe.web.fruit.Service.CartService;
+import tw.idv.joe.web.fruit.Service.FruitService;
 import tw.idv.joe.web.fruit.entity.Cart;
+import tw.idv.joe.web.fruit.entity.Fruit;
 
 /**  
 * 
@@ -30,14 +33,17 @@ import tw.idv.joe.web.fruit.entity.Cart;
 public class CartController {
 	@Autowired
 	CartService service;
-	
-	@GetMapping("/{name}")
+	@Autowired
+	FruitService fService;
+	//搜尋購物車內容
+	@GetMapping("/search/{name}")
 	public List<Cart> selectName(@PathVariable String name){
 		return service.selectName(name);
 	}
-	@GetMapping("/get/{id}")
-	public List<Cart> getByMemId(@PathVariable Integer id){
-		return service.findByMemId(id);
+	//查詢該會員購物車內容
+	@GetMapping("/get/{memId}")
+	public List<Cart> getByMemId(@PathVariable Integer memId){
+		return service.findByMemId(memId);
 	}
 	@PutMapping("/edit")
 	public Cart edit(@RequestBody Cart cart) {
@@ -49,15 +55,21 @@ public class CartController {
 		}
 		return service.edit(cart);
 	}
-	@PostMapping("/add")
-	public Cart insert(@RequestBody Cart cart) {
-		if(cart == null) {
-			cart = new Cart();
+	@PostMapping("/add/{id}")
+	public Cart insert(@PathVariable Integer id) {
+		if(id == null) {
+			Cart cart = new Cart();
 			cart.setSuccessful(false);
 			cart.setMessage("輸入資料為空 請檢查後再送出。");
 			return cart;
 		}
-		cart = service.addCart(cart);
+		Optional<Fruit> fruit = fService.selectForId(id);
+		
+		if(fruit.isPresent()) {
+			Fruit fruit2 = fruit.get();
+			Cart cart = new Cart();
+		}
+		Cart cart = new Cart();
 		return cart;
 	}
 }

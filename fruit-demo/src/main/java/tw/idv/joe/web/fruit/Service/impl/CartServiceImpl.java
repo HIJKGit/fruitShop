@@ -80,11 +80,14 @@ public class CartServiceImpl implements CartService {
 		return eCart;
 	}
 
-	@Transactional
 	@Override
 	public boolean deleteById(Integer id) {
-		cRepository.deleteById(id);
-		return true;
+		try {
+			cRepository.deleteById(id);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 	@Override
@@ -123,7 +126,7 @@ public class CartServiceImpl implements CartService {
 		}
 
 		// 檢查水果庫存量
-		if (fruit.getAmount() <= amount) {
+		if (fruit.getAmount() < amount) {
 			cart.setMessage("此商品庫存不足 請刷新頁面後查看剩餘庫存");
 			cart.setSuccessful(false);
 			return cart;
