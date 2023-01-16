@@ -24,7 +24,7 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
 	int saveAllOrder(Integer memId);
     
 	@Query(value = "INSERT INTO Order (memId,name,amount,total) SELECT memId,name,amount,price*amount FROM Cart WHERE memId = :memId AND id IN :id")
-	int saveOrder(Integer memId,Integer[] id);
+	int saveOrders(Integer memId,Integer[] id);
 	
 	List<Order> findByMemId(Integer id);
 }

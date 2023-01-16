@@ -51,7 +51,7 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public int addOrders(Integer memId, Integer[] id) {
 		try {
-			repository.saveOrder(memId, id);
+			repository.saveOrders(memId, id);
 			return 1;
 		} catch (Exception ignore) {
 			return -1;

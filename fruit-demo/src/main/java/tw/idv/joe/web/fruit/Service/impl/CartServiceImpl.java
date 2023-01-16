@@ -142,4 +142,9 @@ public class CartServiceImpl implements CartService {
 		return cRepository.findListByMemId(memId);
 	}
 
+	@Override
+	public boolean deleteByIds(Integer[] id) {
+		return cRepository.deleteCart(id);
+	}
+	
 }

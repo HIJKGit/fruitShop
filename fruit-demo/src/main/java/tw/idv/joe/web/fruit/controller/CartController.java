@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,7 +43,7 @@ public class CartController {
 	}
 	//查詢該會員購物車內容
 	@GetMapping("/get/{memId}")
-	public List<Cart> getByMemId(@PathVariable Integer memId){
+	public List<Cart> getCart(@PathVariable Integer memId){
 		return service.findByMemId(memId);
 	}
 	@PutMapping("/edit")
@@ -55,21 +56,19 @@ public class CartController {
 		}
 		return service.edit(cart);
 	}
-	@PostMapping("/add/{id}")
-	public Cart insert(@PathVariable Integer id) {
-		if(id == null) {
-			Cart cart = new Cart();
+	@PostMapping("/add")
+	public Cart add(@RequestBody Cart cart) {
+		if(cart == null) {
+			cart = new Cart();
 			cart.setSuccessful(false);
 			cart.setMessage("輸入資料為空 請檢查後再送出。");
 			return cart;
 		}
-		Optional<Fruit> fruit = fService.selectForId(id);
-		
-		if(fruit.isPresent()) {
-			Fruit fruit2 = fruit.get();
-			Cart cart = new Cart();
-		}
-		Cart cart = new Cart();
-		return cart;
+		return service.addCart(cart);
+	}
+	
+	@DeleteMapping("/delete")
+	public boolean delete(@RequestBody Integer[] id) {
+		return service.deleteByIds(id);
 	}
 }
