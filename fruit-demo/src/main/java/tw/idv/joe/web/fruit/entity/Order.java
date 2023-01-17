@@ -3,6 +3,8 @@
  */
 package tw.idv.joe.web.fruit.entity;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,7 +26,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Table
+@Table(name = "`Order`")
 @Entity
 public class Order {
 	@Id
@@ -35,5 +37,6 @@ public class Order {
 	private String name;
 	private Integer amount;
 	private Integer total;
-	
+	@Column(name = "CREATED_DATE", insertable = false, updatable = false)
+	private Timestamp createdDate;
 }

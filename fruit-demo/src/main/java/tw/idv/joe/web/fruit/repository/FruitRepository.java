@@ -12,19 +12,15 @@ package tw.idv.joe.web.fruit.repository;
 */
 
 import java.util.List;
-
-
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import tw.idv.joe.web.fruit.entity.Fruit;
+@Repository
 public interface FruitRepository extends JpaRepository<Fruit, Integer>,FruitOperation {
 
 	Fruit findByName(String name);
-
-	@Query(value = "INSERT INTO Cart (memId,name,amount,price) SELECT memId,name,amount,price FROM Fruit WHERE memId = :memId AND id IN :id")
-	int saveOrder(Integer memId,Integer[] id);
 	
 	List<Fruit> findByNameContaining(String name);
 

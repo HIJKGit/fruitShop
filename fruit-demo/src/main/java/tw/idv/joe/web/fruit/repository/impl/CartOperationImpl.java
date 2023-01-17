@@ -8,6 +8,7 @@ import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 import org.hibernate.Session;
+import org.springframework.stereotype.Repository;
 
 import tw.idv.joe.web.fruit.entity.Cart;
 import tw.idv.joe.web.fruit.repository.CartOperation;

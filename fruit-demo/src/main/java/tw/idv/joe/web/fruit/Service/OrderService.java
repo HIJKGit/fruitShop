@@ -5,6 +5,8 @@ package tw.idv.joe.web.fruit.Service;
 
 import java.util.List;
 
+import tw.idv.joe.core.pojo.Core;
+import tw.idv.joe.web.fruit.entity.Cart;
 import tw.idv.joe.web.fruit.entity.Order;
 
 /**  
@@ -20,8 +22,10 @@ public interface OrderService {
 	
 	int addAllOrder(Integer memId);
 	
-	int addOrders(Integer memId, Integer[] id);
-	
 	List<Order> selectAll();
+
+	int addOrders(Integer memId, List<Integer> id);
+
+	boolean remove(Integer id);
 	
 }

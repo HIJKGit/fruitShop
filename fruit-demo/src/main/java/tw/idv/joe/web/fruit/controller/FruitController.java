@@ -6,6 +6,7 @@ package tw.idv.joe.web.fruit.controller;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -30,7 +31,6 @@ import tw.idv.joe.web.fruit.entity.Fruit;
  */
 // 加在方法或類別名皆可
 //@CrossOrigin("http://127.0.0.1:5500/")
-@CrossOrigin("http://localhost:4200/")
 @RestController
 @RequestMapping("/")
 public class FruitController {
@@ -112,4 +112,5 @@ public class FruitController {
 		}
 		return service.update(fruit);
 	}
+	
 }

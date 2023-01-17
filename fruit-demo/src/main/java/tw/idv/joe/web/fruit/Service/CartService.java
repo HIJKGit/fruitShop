@@ -19,12 +19,17 @@ public interface CartService {
 
 	List<Cart> findByMemId(Integer memId);
 
-	boolean deleteByIds(Integer[] id);
-	
-	Cart edit(Cart cart);
+	List<Cart> selectAllByIds(List<Integer> ids);
 
-	boolean deleteById(Integer id);
+	Cart edit(Cart cart);
 
 	Cart addCart(Cart cart);
 
+	boolean deleteById(Integer id);
+
+
+	boolean deleteByIds(List<Integer> id);
+
+
+	boolean deleteByAll(Integer memId);
 }

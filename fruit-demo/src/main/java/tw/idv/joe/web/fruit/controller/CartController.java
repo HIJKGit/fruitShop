@@ -3,7 +3,9 @@
  */
 package tw.idv.joe.web.fruit.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +38,12 @@ public class CartController {
 	CartService service;
 	@Autowired
 	FruitService fService;
+	
+	
+	@GetMapping()
+	public List<Cart> getAll(){
+		return service.selectAll();
+	}
 	//搜尋購物車內容
 	@GetMapping("/search/{name}")
 	public List<Cart> selectName(@PathVariable String name){
@@ -67,8 +75,20 @@ public class CartController {
 		return service.addCart(cart);
 	}
 	
-	@DeleteMapping("/delete")
-	public boolean delete(@RequestBody Integer[] id) {
-		return service.deleteByIds(id);
+	@DeleteMapping("/delete/{id}")
+	public boolean delete(@PathVariable Integer id) {
+		return service.deleteById(id);
 	}
+	@DeleteMapping("/delete/all/{memId}")
+	public boolean deleteAll(@PathVariable Integer memId) {
+		System.out.println(memId);
+		return service.deleteByAll(memId);
+	}
+	@DeleteMapping("/delete/list/{memId}")
+	public boolean deleteCarts(@PathVariable Integer memId, @RequestBody List<Map<String,Object>> list) {
+		List<Integer> idList = new ArrayList<>();
+		list.forEach(e -> idList.add((Integer) e.get("id")));
+		return service.deleteByIds(idList);
+	}
+	
 }
